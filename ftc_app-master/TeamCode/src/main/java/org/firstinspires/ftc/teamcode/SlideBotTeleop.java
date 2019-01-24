@@ -39,9 +39,10 @@ public class SlideBotTeleop extends LinearOpMode {
         robot.slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
-
+        // Main Loop
         while(opModeIsActive()){
 
+            // Toggles slow drive mode
             if(gamepad1.right_bumper && !speedDown){
                 if(c == 1f){
                     c = 0.6f;
@@ -52,7 +53,7 @@ public class SlideBotTeleop extends LinearOpMode {
             } else if (!gamepad1.right_bumper){
                 speedDown = false;
             }
-
+            // Toggles Sweeper Direction
             if(gamepad1.left_bumper && !sweeperDown){
                 if(s == 1f){
                     s = -1f;
@@ -65,7 +66,7 @@ public class SlideBotTeleop extends LinearOpMode {
             }
 
             sweeper = s*gamepad1.left_trigger;
-
+            // Toggles basket arm lift
             if(gamepad2.y){
                 armUp = true;
             }
@@ -75,7 +76,7 @@ public class SlideBotTeleop extends LinearOpMode {
             }
 
             lPower = -c*gamepad1.left_stick_y;
-            rPower = - c*gamepad1.right_stick_y;
+            rPower = -c*gamepad1.right_stick_y;
 
             robot.left.setPower(lPower);
             robot.right.setPower(rPower);
