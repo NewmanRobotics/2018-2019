@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
- * Created by graha on 9/24/2018.
+ * Created by graham cooke on 9/24/2018.
  */
 
 public class armBotHardware {
@@ -29,14 +29,11 @@ public class armBotHardware {
 
         right = hwMap.dcMotor.get("Right");
         left = hwMap.dcMotor.get("Left");
-        arm = hwMap.dcMotor.get("Arm");
 
         left.setDirection(DcMotorSimple.Direction.REVERSE);
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         right.setPower(0);
         left.setPower(0);
-        arm.setPower(0);
 
     }
 

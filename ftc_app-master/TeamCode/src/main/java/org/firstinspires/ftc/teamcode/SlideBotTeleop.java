@@ -20,8 +20,8 @@ public class SlideBotTeleop extends LinearOpMode {
         float lPower = 0;
         float rPower = 0;
 
-        float c = 0.6f;
-        float s = 1f;
+        float driveSpeed = 0.6f;
+        float sweepSpeed = 1f;
 
         float drive;
         float turn;
@@ -44,39 +44,18 @@ public class SlideBotTeleop extends LinearOpMode {
 
             // Toggles slow drive mode
             if(gamepad1.right_bumper && !speedDown){
-                if(c == 1f){
-                    c = 0.6f;
+                if(driveSpeed == 1f){
+                    driveSpeed = 0.6f;
                 } else {
-                    c = 1f;
+                    driveSpeed = 1f;
                 }
                 speedDown = true;
             } else if (!gamepad1.right_bumper){
                 speedDown = false;
             }
-            // Toggles Sweeper Direction
-            if(gamepad1.left_bumper && !sweeperDown){
-                if(s == 1f){
-                    s = -1f;
-                } else {
-                    s = 1f;
-                }
-                sweeperDown = true;
-            } else if (!gamepad1.left_bumper){
-                sweeperDown = false;
-            }
 
-            sweeper = s*gamepad1.left_trigger;
-            // Toggles basket arm lift
-            if(gamepad2.y){
-                armUp = true;
-            }
-
-            if(gamepad2.x){
-                armUp = false;
-            }
-
-            lPower = -c*gamepad1.left_stick_y;
-            rPower = -c*gamepad1.right_stick_y;
+            lPower = -driveSpeed*gamepad1.left_stick_y;
+            rPower = -driveSpeed*gamepad1.right_stick_y;
 
             robot.left.setPower(lPower);
             robot.right.setPower(rPower);
@@ -84,17 +63,10 @@ public class SlideBotTeleop extends LinearOpMode {
             slide = -gamepad2.left_stick_y;
 
             robot.slide.setPower(slide);
-            robot.sweeper.setPower(sweeper);
-
-            if(armUp){
-                robot.arm.setPosition(0);
-            } else {
-                robot.arm.setPosition(1);
-            }
 
             telemetry.update();
 
-            robot.waitForTick(10);
+            robot.waitForTick(5);
             idle();
         }
     }
